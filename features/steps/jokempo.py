@@ -4,9 +4,9 @@ from hamcrest import assert_that, equal_to, is_not
 
 
 class Jogo(object):
-    def __init__(self, p1=None):
+    def __init__(self, p1=None, p2=None):
         self.p1 = p1
-        self.p2 = None
+        self.p2 = p2
 
     def validate(self):
         val_validos = ["tesoura", "papel", "pedra"]
@@ -31,7 +31,7 @@ class Jogo(object):
 
 @given('Jogador 1 escolhe papel')
 def step_given(context):
-    context.jogo = Jogo('papel')
+    context.jogo = Jogo(p1='papel')
 
 @when('Jogador 2 escolhe pedra')
 def step_when(context):
@@ -40,3 +40,15 @@ def step_when(context):
 @then('Jogador 1 vence')
 def step_vence(context):
     assert_that('Jogador 1', equal_to(context.jogo.avalia()))
+
+@given('Jogador 2 escolhe papel')
+def step_given(context):
+    context.jogo = Jogo(p2='papel')
+
+@when('Jogador 1 escolhe pedra')
+def step_when(context):
+    context.jogo.p1 = 'pedra'
+
+@then('Jogador 2 vence')
+def step_vence(context):
+    assert_that('Jogador 2', equal_to(context.jogo.avalia()))
