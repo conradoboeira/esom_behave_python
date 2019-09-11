@@ -9,3 +9,8 @@ Feature: Jogo de Jokempo
         Given Jogador 2 escolhe papel
         When Jogador 1 escolhe pedra
         Then Jogador 2 vence
+
+	Scenario: Jogador 2 escolheu spock 
+        Given Jogador 2 escolhe spock
+        When Jogador 1 escolhe pedra
+        Then Opção inválida para Jogador 2
